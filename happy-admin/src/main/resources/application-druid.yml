@@ -6,7 +6,7 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:postgresql://localhost:5432/postgres
+                url: jdbc:postgresql://localhost:5432/marathon
                 username: postgres
                 password: root
             # 从库数据源

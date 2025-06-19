@@ -6,4 +6,5 @@
 
     <include file="20250521-happy.sql" relativeToChangelogFile="true"/>
 <!--    <include file="20250521-quartz.sql" relativeToChangelogFile="true"/>-->
+    <include file="20250619-marathon.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
