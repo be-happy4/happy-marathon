@@ -29,7 +29,7 @@ public class AiKnowledgeDocumentCreateListReqVO {
     @Data
     public static class Document {
 
-        @Schema(description = "文档名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "三方登陆")
+        @Schema(description = "文档名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "三方登录")
         @NotBlank(message = "文档名称不能为空")
         private String name;
 

@@ -25,7 +25,7 @@ import java.util.Set;
 
 /**
  * 多租户 Security Web 过滤器
- * 1. 如果是登陆的用户，校验是否有权限访问该租户，避免越权问题。
+ * 1. 如果是登录的用户，校验是否有权限访问该租户，避免越权问题。
  * 2. 如果请求未带租户的编号，检查是否是忽略的 URL，否则也不允许访问。
  * 3. 校验租户是合法，例如说被禁用、到期
  *
@@ -65,10 +65,10 @@ public class TenantSecurityWebFilter extends ApiRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         Long tenantId = TenantContextHolder.getTenantId();
-        // 1. 登陆的用户，校验是否有权限访问该租户，避免越权问题。
+        // 1. 登录的用户，校验是否有权限访问该租户，避免越权问题。
         LoginUser user = SecurityFrameworkUtils.getLoginUser();
         if (user != null) {
-            // 如果获取不到租户编号，则尝试使用登陆用户的租户编号
+            // 如果获取不到租户编号，则尝试使用登录用户的租户编号
             if (tenantId == null) {
                 tenantId = user.getTenantId();
                 TenantContextHolder.setTenantId(tenantId);

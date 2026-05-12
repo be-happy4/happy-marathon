@@ -136,7 +136,7 @@ public interface PermissionService {
     void assignRoleDataScope(Long roleId, Integer dataScope, Set<Long> dataScopeDeptIds);
 
     /**
-     * 获得登陆用户的部门数据权限
+     * 获得登录用户的部门数据权限
      *
      * @param userId 用户编号
      * @return 部门数据权限

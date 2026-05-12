@@ -28,7 +28,7 @@ public interface PermissionCommonApi {
     boolean hasAnyRoles(Long userId, String... roles);
 
     /**
-     * 获得登陆用户的部门数据权限
+     * 获得登录用户的部门数据权限
      *
      * @param userId 用户编号
      * @return 部门数据权限

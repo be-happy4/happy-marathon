@@ -1,0 +1,30 @@
+INSERT INTO public.system_dict_type (id,name,"type",status,remark,creator,create_time,updater,update_time,deleted,deleted_time) VALUES
+	 (3001,'赛事标签','game_tag',0,'','1','2026-05-11 00:00:00','1','2026-05-11 00:00:00',0,'1970-01-01 00:00:00'),
+	 (3002,'赛事类型','game_type',0,'','1','2026-05-11 00:00:00','1','2026-05-11 00:00:00',0,'1970-01-01 00:00:00'),
+	 (3003,'赛事状态','game_status',0,'','1','2026-05-11 00:00:00','1','2026-05-11 00:00:00',0,'1970-01-01 00:00:00'),
+	 (3004,'国际田联标牌等级','game_world_athletics_label_level',0,'https://worldathletics.org/competitions/world-athletics-label-road-races','1','2026-05-11 00:00:00','1','2026-05-11 00:00:00',0,'1970-01-01 00:00:00'),
+	 (3005,'中国田联路跑赛事等级','game_china_road_run_game_level',0,'https://www.athletics.org.cn/bulletin/hygd/mls/2023/0320/452980.html?f_link_type=f_linkinlinenote&flow_extra=eyJkb2NfaWQiOiIzYWM2MDlhMjI5ZjgxMzI5LTFjNDczYWIxOWM0ZTNkNTkiLCJpbmxpbmVfZGlzcGxheV9wb3NpdGlvbiI6MCwiZG9jX3Bvc2l0aW9uIjowfQ%3D%3D','1','2026-05-11 00:00:00','1','2026-05-11 00:00:00',0,'1970-01-01 00:00:00');
+
+INSERT INTO public.system_dict_data(id, sort, "label", value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES
+     (4001, 5, 'A2', 'a2', 'game_china_road_run_game_level', 0, 'danger', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4002, 4, 'A1', 'a1', 'game_china_road_run_game_level', 0, 'danger', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4003, 3, 'C', 'c', 'game_china_road_run_game_level', 0, 'success', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4004, 2, 'B', 'b', 'game_china_road_run_game_level', 0, 'warning', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4005, 1, 'A', 'a', 'game_china_road_run_game_level', 0, 'danger', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4006, 4, '标牌', 'label', 'game_world_athletics_label_level', 0, 'success', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4007, 3, '精英标', 'elite', 'game_world_athletics_label_level', 0, 'info', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4008, 2, '金标', 'gold', 'game_world_athletics_label_level', 0, 'warning', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4009, 1, '白金标', 'platinum', 'game_world_athletics_label_level', 0, 'default', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4010, 9, '已取消', 'canceled', 'game_status', 0, 'danger', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4011, 8, '已结束', 'finished', 'game_status', 0, 'success', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4012, 7, '待开始', 'prepared', 'game_status', 0, 'info', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4013, 6, '候补阶段', 'waitlist_phase', 'game_status', 0, 'warning', '', '抽签结束进入候补', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4014, 5, '多轮抽签', 'multi_round_lottery', 'game_status', 0, 'warning', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4015, 4, '待抽签', 'awaiting_draw', 'game_status', 0, 'warning', '', '报名结束待抽签', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4016, 3, '报名中', 'registration_open', 'game_status', 0, 'primary', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4017, 2, '定档', 'announced', 'game_status', 0, 'default', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4018, 1, '规划中', 'uncertain', 'game_status', 0, 'default', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4019, 4, '越野赛', 'trail_run', 'game_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4020, 3, '路跑赛事', 'road_run', 'game_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4021, 2, '半程马拉松', 'half_marathon', 'game_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4022, 1, '马拉松', 'marathon', 'game_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0);

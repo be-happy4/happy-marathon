@@ -2167,17 +2167,17 @@ INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_t
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (38, 5, N'仅本人数据权限', N'5', N'system_data_scope', 0, N'', N'', N'仅本人数据权限', N'admin', N'2021-01-05 17:03:48', N'', N'2022-02-01 16:47:23', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (39, 0, N'成功', N'0', N'system_login_result', 0, N'success', N'', N'登陆结果 - 成功', N'', N'2021-01-18 06:17:36', N'1', N'2022-02-16 13:23:49', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (39, 0, N'成功', N'0', N'system_login_result', 0, N'success', N'', N'登录结果 - 成功', N'', N'2021-01-18 06:17:36', N'1', N'2022-02-16 13:23:49', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (40, 10, N'账号或密码不正确', N'10', N'system_login_result', 0, N'primary', N'', N'登陆结果 - 账号或密码不正确', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:27', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (40, 10, N'账号或密码不正确', N'10', N'system_login_result', 0, N'primary', N'', N'登录结果 - 账号或密码不正确', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:27', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (41, 20, N'用户被禁用', N'20', N'system_login_result', 0, N'warning', N'', N'登陆结果 - 用户被禁用', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:23:57', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (41, 20, N'用户被禁用', N'20', N'system_login_result', 0, N'warning', N'', N'登录结果 - 用户被禁用', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:23:57', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (42, 30, N'验证码不存在', N'30', N'system_login_result', 0, N'info', N'', N'登陆结果 - 验证码不存在', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:07', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (42, 30, N'验证码不存在', N'30', N'system_login_result', 0, N'info', N'', N'登录结果 - 验证码不存在', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:07', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (43, 31, N'验证码不正确', N'31', N'system_login_result', 0, N'info', N'', N'登陆结果 - 验证码不正确', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:11', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (43, 31, N'验证码不正确', N'31', N'system_login_result', 0, N'info', N'', N'登录结果 - 验证码不正确', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:11', N'0')
 GO
-INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (44, 100, N'未知异常', N'100', N'system_login_result', 0, N'danger', N'', N'登陆结果 - 未知异常', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:23', N'0')
+INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (44, 100, N'未知异常', N'100', N'system_login_result', 0, N'danger', N'', N'登录结果 - 未知异常', N'', N'2021-01-18 06:17:54', N'1', N'2022-02-16 13:24:23', N'0')
 GO
 INSERT INTO system_dict_data (id, sort, label, value, dict_type, status, color_type, css_class, remark, creator, create_time, updater, update_time, deleted) VALUES (45, 1, N'是', N'true', N'infra_boolean_string', 0, N'danger', N'', N'Boolean 是否类型 - 是', N'', N'2021-01-19 03:20:55', N'1', N'2022-03-15 23:01:45', N'0')
 GO
@@ -4066,7 +4066,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (11, N'Boolean 是否类型', N'infra_boolean_string', 0, N'boolean 转是否', N'', N'2021-01-19 03:20:08', N'', N'2022-02-01 16:37:10', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (104, N'登陆结果', N'system_login_result', 0, N'登陆结果', N'', N'2021-01-18 06:17:11', N'', N'2022-02-01 16:36:00', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (104, N'登录结果', N'system_login_result', 0, N'登录结果', N'', N'2021-01-18 06:17:11', N'', N'2022-02-01 16:36:00', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (106, N'代码生成模板类型', N'infra_codegen_template_type', 0, NULL, N'', N'2021-02-05 07:08:06', N'1', N'2022-05-16 20:26:50', N'0', NULL)
 GO
@@ -4086,7 +4086,7 @@ INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_ti
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (114, N'短信接收状态', N'system_sms_receive_status', 0, NULL, N'1', N'2021-04-11 20:27:14', N'1', N'2022-02-01 16:35:14', N'0', NULL)
 GO
-INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (116, N'登陆日志的类型', N'system_login_type', 0, N'登陆日志的类型', N'1', N'2021-10-06 00:50:46', N'1', N'2022-02-01 16:35:56', N'0', NULL)
+INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (116, N'登录日志的类型', N'system_login_type', 0, N'登录日志的类型', N'1', N'2021-10-06 00:50:46', N'1', N'2022-02-01 16:35:56', N'0', NULL)
 GO
 INSERT INTO system_dict_type (id, name, type, status, remark, creator, create_time, updater, update_time, deleted, deleted_time) VALUES (117, N'OA 请假类型', N'bpm_oa_leave_type', 0, NULL, N'1', N'2021-09-21 22:34:33', N'1', N'2022-01-22 10:41:37', N'0', NULL)
 GO
@@ -4504,7 +4504,7 @@ EXEC sp_addextendedproperty
 GO
 
 EXEC sp_addextendedproperty
-    'MS_Description', N'登陆结果',
+    'MS_Description', N'登录结果',
     'SCHEMA', N'dbo',
     'TABLE', N'system_login_log',
     'COLUMN', N'result'

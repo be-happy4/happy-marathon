@@ -15,7 +15,7 @@ public class AiKnowledgeDocumentCreateReqVO {
     @NotNull(message = "知识库编号不能为空")
     private Long knowledgeId;
 
-    @Schema(description = "文档名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "三方登陆")
+    @Schema(description = "文档名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "三方登录")
     @NotBlank(message = "文档名称不能为空")
     private String name;
 

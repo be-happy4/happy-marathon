@@ -29,9 +29,9 @@ public interface MemberAuthService {
     void logout(String token);
 
     /**
-     * 手机 + 验证码登陆
+     * 手机 + 验证码登录
      *
-     * @param reqVO    登陆信息
+     * @param reqVO    登录信息
      * @return 登录结果
      */
     AppAuthLoginRespVO smsLogin(@Valid AppAuthSmsLoginReqVO reqVO);

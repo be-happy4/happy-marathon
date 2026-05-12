@@ -89,7 +89,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 
     @Override
     public Expression getExpression(String tableName, Alias tableAlias) {
-        // 只有有登陆用户的情况下，才进行数据权限的处理
+        // 只有有登录用户的情况下，才进行数据权限的处理
         LoginUser loginUser = SecurityFrameworkUtils.getLoginUser();
         if (loginUser == null) {
             return null;

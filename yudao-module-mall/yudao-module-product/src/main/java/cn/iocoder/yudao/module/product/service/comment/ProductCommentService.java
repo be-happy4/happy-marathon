@@ -48,7 +48,7 @@ public interface ProductCommentService {
      * 商家回复
      *
      * @param replyVO     商家回复
-     * @param userId 管理后台商家登陆人 ID
+     * @param userId 管理后台商家登录人 ID
      */
     void replyComment(ProductCommentReplyReqVO replyVO, Long userId);
 

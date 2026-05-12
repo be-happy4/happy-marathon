@@ -59,10 +59,10 @@ public interface MemberUserService {
     MemberUserDO createUser(String nickname, String avtar, String registerIp, Integer terminal);
 
     /**
-     * 更新用户的最后登陆信息
+     * 更新用户的最后登录信息
      *
      * @param id      用户编号
-     * @param loginIp 登陆 IP
+     * @param loginIp 登录 IP
      */
     void updateUserLogin(Long id, String loginIp);
 

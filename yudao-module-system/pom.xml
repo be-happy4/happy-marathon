@@ -93,7 +93,7 @@
         <!-- 三方云服务相关 -->
         <dependency>
             <groupId>me.zhyd.oauth</groupId>
-            <artifactId>JustAuth</artifactId> <!-- 社交登陆（例如说，个人微信、企业微信等等） -->
+            <artifactId>JustAuth</artifactId> <!-- 社交登录（例如说，个人微信、企业微信等等） -->
         </dependency>
         <dependency>
             <groupId>com.xkcoding.justauth</groupId>
