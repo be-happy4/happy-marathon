@@ -115,3 +115,179 @@ Tests use `application-unit-test` profile. Use `AssertUtils` for common assertio
 - `yudao.security.mock-enable` — when true, allows mock login in dev (set in `application-local.yaml`)
 - `yudao.demo` — demo mode, must be `false` for normal operation
 - `yudao.captcha.enable` — toggle captcha (disabled in local profile)
+
+## Game Module (赛事管理)
+
+The game module is a custom module under `yudao-module-system` that manages marathon events and personal race registrations.
+
+### Tables
+
+| Table | Purpose | Seq |
+|-------|---------|-----|
+| `system_game` | Marathon event/race data | `system_game_seq` |
+| `system_game_registration` | Per-person registration/participation records | `system_game_registration_seq` |
+
+Both tables inherit `TenantBaseDO → BaseDO`, meaning they have `creator`, `create_time`, `updater`, `update_time`, `deleted` (smallint 0/1, NOT boolean), `tenant_id`. IDs are manually assigned via sequences (MyBatis Plus `@KeySequence`).
+
+### Java files
+
+```
+yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/
+├── controller/admin/game/
+│   ├── GameController.java              # REST /admin-api/system/game
+│   └── vo/
+│       ├── GameSaveReqVO.java
+│       ├── GameRespVO.java
+│       ├── GamePageReqVO.java           # extends SortablePageParam (for server-side sorting)
+│       └── GameSimpleRespVO.java
+├── controller/admin/gameregistration/
+│   ├── GameRegistrationController.java  # REST /admin-api/system/game-registration
+│   └── vo/
+│       ├── GameRegistrationSaveReqVO.java
+│       ├── GameRegistrationRespVO.java
+│       └── GameRegistrationPageReqVO.java
+├── service/game/
+│   ├── GameService.java / GameServiceImpl.java
+│   └── GameRegistrationService.java / GameRegistrationServiceImpl.java
+├── dal/dataobject/game/
+│   ├── GameDO.java                      # @TableName("system_game")
+│   └── GameRegistrationDO.java          # @TableName("system_game_registration")
+└── dal/mysql/game/
+    ├── GameMapper.java                  # extends BaseMapperX<GameDO>
+    └── GameRegistrationMapper.java
+```
+
+Error codes: `ErrorCodeConstants.GAME_NOT_FOUND` (1_002_029_000), `GAME_REGISTRATION_NOT_FOUND` (1_002_029_001)
+
+### Dictionary codes
+
+The game module uses dynamic dictionaries (stored in `system_dict_type` / `system_dict_data`). All field values are **English code strings**, not Chinese labels.
+
+**`game_type`** (dict type 3002, values 4019-4022):
+| Code | Label |
+|------|-------|
+| `marathon` | 马拉松 |
+| `half_marathon` | 半程马拉松 |
+| `road_run` | 路跑赛事 |
+| `trail_run` | 越野赛 |
+
+**`game_world_athletics_label_level`** (dict type 3004, values 4006-4009):
+| Code | Label |
+|------|-------|
+| `platinum` | 白金标 |
+| `gold` | 金标 |
+| `elite` | 精英标 |
+| `label` | 标牌 |
+
+**`game_china_road_run_game_level`** (dict type 3005, values 4001-4005):
+| Code | Label |
+|------|-------|
+| `a` | A |
+| `a1` | A1 |
+| `a2` | A2 |
+| `b` | B |
+| `c` | C |
+
+**`game_status`** (dict type 3003, values 4010-4018):
+| Code | Label | Meaning |
+|------|-------|---------|
+| `uncertain` | 规划中 | Game date/status unconfirmed |
+| `announced` | 定档 | Date confirmed, registration not yet open |
+| `registration_open` | 报名中 | Registration open |
+| `awaiting_draw` | 待抽签 | Registration closed, waiting for lottery |
+| `multi_round_lottery` | 多轮抽签 | Multi-round lottery in progress |
+| `waitlist_phase` | 候补阶段 | Waitlist phase after lottery |
+| `prepared` | 待开始 | Pre-race ready |
+| `finished` | 已结束 | Race completed |
+| `canceled` | 已取消 | Race canceled |
+
+**`game_registration_status`** (dict type 3006, values 4025-4034):
+| Code | Label | Meaning |
+|------|-------|---------|
+| `not_participate` | 不参加 | Chose not to participate |
+| `unregistered` | 未报名 | Not yet registered |
+| `registered` | 已报名 | Registered (includes lottery-pending) |
+| `waitlisted` | 候补中 | On waitlist |
+| `accepted` | 已中签 | Won lottery |
+| `completed` | 已完赛 | Finished the race |
+| `not_accepted` | 未中签 | Lost lottery |
+| `give_up_race` | 退赛 | Withdrew from race |
+| `give_up_lottery` | 中签放弃 | Won lottery but gave up spot |
+
+**`game_tag`** (dict type 3001, values 4023-4024):
+| Code | Label |
+|------|-------|
+| `wmm` | 世界马拉松大满贯 |
+| `cmm` | 中国马拉松大满贯 |
+
+Tags field is comma-separated. Non-dictionary tags (like `省会`, `浙江`, `上马`) are stored as plain text alongside dict codes (e.g., `"cmm,省会"`).
+
+### CSV → Database mapping rules
+
+When converting marathon race CSV data to `system_game` + `system_game_registration` INSERTs:
+
+1. **Deduplicate games by name** — same game name = same `system_game` row. Assign sequential IDs.
+2. **Sort by `game_date`** ascending before assigning IDs.
+3. **`game_type`**: map CSV "Group" column → dict code. "Full Marathon"→`marathon`, "Half Marathon"→`half_marathon`, "10KM"→`road_run`, "Trail Run"→`trail_run`, "Road Run"→`road_run`.
+4. **`world_athletics_level`**: map "Platinum Label"→`platinum`, "Gold Label"→`gold`, "Elite Label"→`elite`, "Label"→`label`.
+5. **`china_road_run_level`**: map "A"→`a`, "A1"→`a1`, "B"→`b`, "C"→`c`.
+6. **`status` (game)**: derive from game date + registration status. If CSV status="Canceled" → `canceled`. If `game_date` < today → `finished`. Otherwise → `announced`.
+7. **`registration_status`**: map "Completed"→`completed`, "Unsuccess"→`not_accepted`, "Give up Lottery"→`give_up_lottery`, "Not participating"→`not_participate`, "Canceled"→`give_up_race`, "Uncertain"/"Unregistered"→`unregistered`, "To be drawn"→`waitlisted`, "Registered"→`registered`.
+8. **`deleted`** column is **smallint, not boolean**. Use `0` (not deleted) / `1` (deleted). Never use `'false'`/`'true'`.
+9. **`creator`/`updater`**: use `'1'` (admin user ID as string).
+10. **`tenant_id`**: always `1`.
+11. **`gun_time_ms`**: parse "H:MM:SS" or "MM:SS" → total milliseconds. NULL if empty.
+12. **`net_time_ms`**: parse `Net Time(Seconds)` column × 1000. NULL if 0 or empty.
+13. **`priority`**: integer only. Decimal values (8.5, 7.5) should be rounded or left NULL — the DO field is `Integer`.
+14. **Date parsing**: extract year from first `(19|20)\d{2}` in game name. Parse month abbreviation from Date column. Handle formats like "Dec 1" and "Nov 2 7:00 AM (GMT+8)".
+
+### SQL seed data conventions
+
+- File: `sql/postgresql/marathon.sql`
+- Contains: DDL (CREATE TABLE, sequences, indexes, comments) → dict_type/dict_data → menu INSERTs → game data INSERTs → directory-disabling UPDATEs
+- Dict IDs start at 3001 (type) / 4001 (data) to avoid collision with ruoyi-vue-pro.sql defaults (which start at 1)
+- Menu IDs start at 6200 (game) / 6300 (registration)
+- Game data is sorted by `game_date` ASC
+- All `deleted` values are `0` (smallint)
+- All `creator`/`updater` are `'1'`
+- Use `NOW()` for timestamps in menu INSERTs; use a fixed timestamp for game data
+
+### Server-side sorting
+
+To add sortable columns to a list page:
+
+**Backend** — change the PageReqVO to extend `SortablePageParam` instead of `PageParam`:
+```java
+// GamePageReqVO extends SortablePageParam  (not PageParam)
+// Frontend sends: { sortingFields: [{ field: "gameDate", order: "desc" }] }
+```
+The existing `gameMapper.selectPage(pageReqVO)` call will automatically resolve to `BaseMapperX.selectPage(SortablePageParam, Wrapper)` which applies ORDER BY from `sortingFields`.
+
+**Frontend** — add `sortable` on the `el-table-column`, `default-sort` on `el-table`, and a `@sort-change` handler using `buildSortingField`:
+```typescript
+import { buildSortingField } from '@/utils'
+// In queryParams:
+sortingFields: [] as { field: string; order: string }[]
+// Handler:
+const handleSortChange = (params: any) => {
+  queryParams.sortingFields = [buildSortingField(params)]
+  handleQuery()
+}
+```
+Template: `<el-table @sort-change="handleSortChange" default-sort="{prop: 'gameDate', order: 'descending'}">`
+Column: `<el-table-column prop="gameDate" sortable ... />`
+
+### Frontend files
+
+```
+happy-marathon-ui/src/
+├── api/system/game/index.ts              # GameVO, GameSimpleVO, API functions
+├── api/system/gameRegistration/index.ts  # GameRegistrationVO, API functions
+├── views/system/game/index.vue           # Game list page
+├── views/system/game/GameForm.vue        # Game create/edit dialog
+├── views/system/gameRegistration/index.vue
+├── views/system/gameRegistration/GameRegistrationForm.vue
+└── utils/dict.ts                         # DICT_TYPE constants (lines 337-342)
+```
+
+The game list page (`index.vue`) uses `dict-tag` components to render dictionary values as colored tags. Filter fields: name (input), gameDate (date range picker), gameType (select from dict), status (select from dict).
