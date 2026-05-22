@@ -15,7 +15,13 @@ public interface GameMapper extends BaseMapperX<GameDO> {
                 .likeIfPresent(GameDO::getName, reqVO.getName())
                 .betweenIfPresent(GameDO::getGameDate, reqVO.getGameDate())
                 .eqIfPresent(GameDO::getGameType, reqVO.getGameType())
+                .inIfPresent(GameDO::getGameType, reqVO.getGameTypes())
                 .eqIfPresent(GameDO::getStatus, reqVO.getStatus())
+                .inIfPresent(GameDO::getStatus, reqVO.getStatuses())
+                .eqIfPresent(GameDO::getWorldAthleticsLevel, reqVO.getWorldAthleticsLevel())
+                .inIfPresent(GameDO::getWorldAthleticsLevel, reqVO.getWorldAthleticsLevels())
+                .eqIfPresent(GameDO::getChinaRoadRunLevel, reqVO.getChinaRoadRunLevel())
+                .inIfPresent(GameDO::getChinaRoadRunLevel, reqVO.getChinaRoadRunLevels())
                 .orderByDesc(GameDO::getId));
     }
 

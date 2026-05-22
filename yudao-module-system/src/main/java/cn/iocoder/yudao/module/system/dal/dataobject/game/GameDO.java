@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -37,9 +36,9 @@ public class GameDO extends TenantBaseDO {
     private String tags;
     /** 赛事官网链接 */
     private String url;
-    /** 赛事距离（公里） */
-    private BigDecimal distanceKm;
-    /** 备注 */
+    /** 地区编号，关联 system_region */
+    private Long regionId;
+    /** 赛事主页，支持 Markdown 格式 */
     private String remark;
 
 }

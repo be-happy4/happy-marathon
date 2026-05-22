@@ -3,7 +3,6 @@ package cn.iocoder.yudao.module.system.controller.admin.game.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -38,10 +37,13 @@ public class GameRespVO {
     @Schema(description = "赛事官网链接")
     private String url;
 
-    @Schema(description = "赛事距离（公里）", example = "42.195")
-    private BigDecimal distanceKm;
+    @Schema(description = "地区编号")
+    private Long regionId;
 
-    @Schema(description = "备注")
+    @Schema(description = "地区名称")
+    private String regionName;
+
+    @Schema(description = "赛事主页，支持 Markdown 格式")
     private String remark;
 
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)

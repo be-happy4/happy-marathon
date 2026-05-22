@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY;
@@ -45,10 +44,10 @@ public class GameSaveReqVO {
     @Schema(description = "赛事官网链接", example = "https://www.shanghai-marathon.com")
     private String url;
 
-    @Schema(description = "赛事距离（公里）", example = "42.195")
-    private BigDecimal distanceKm;
+    @Schema(description = "地区编号，关联 system_region", example = "45")
+    private Long regionId;
 
-    @Schema(description = "备注")
+    @Schema(description = "赛事主页，支持 Markdown 格式")
     private String remark;
 
 }

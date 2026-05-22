@@ -80,6 +80,7 @@ public interface ErrorCodeConstants {
     // ========== 赛事 1-002-029-000 ==========
     ErrorCode GAME_NOT_FOUND = new ErrorCode(1_002_029_000, "赛事不存在");
     ErrorCode GAME_REGISTRATION_NOT_FOUND = new ErrorCode(1_002_029_001, "赛事报名不存在");
+    ErrorCode GAME_CATEGORY_NOT_FOUND = new ErrorCode(1_002_029_002, "赛事组别不存在");
 
     // ========== 短信渠道 1-002-011-000 ==========
     ErrorCode SMS_CHANNEL_NOT_EXISTS = new ErrorCode(1_002_011_000, "短信渠道不存在");

@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 @Schema(description = "管理后台 - 赛事报名创建/修改 Request VO")
 @Data
 public class GameRegistrationSaveReqVO {
@@ -27,6 +25,9 @@ public class GameRegistrationSaveReqVO {
     @Schema(description = "参赛组别，字典 game_type", example = "marathon")
     private String gameType;
 
+    @Schema(description = "组别编号，关联 system_game_category", example = "1")
+    private Long gameCategoryId;
+
     @Schema(description = "个人优先级", example = "10")
     private Integer priority;
 
@@ -47,9 +48,6 @@ public class GameRegistrationSaveReqVO {
 
     @Schema(description = "总排名", example = "500")
     private Integer overallPlace;
-
-    @Schema(description = "实际完成距离（公里）", example = "42.195")
-    private BigDecimal distanceKm;
 
     @Schema(description = "备注")
     private String remark;

@@ -6,6 +6,7 @@ import cn.iocoder.yudao.module.system.controller.admin.game.vo.GameSaveReqVO;
 import cn.iocoder.yudao.module.system.dal.dataobject.game.GameDO;
 import jakarta.validation.Valid;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface GameService {
     PageResult<GameDO> getGamePage(GamePageReqVO pageReqVO);
 
     List<GameDO> getGameList(Collection<Long> ids);
+
+    List<Long> getGameListByDateRange(LocalDate start, LocalDate end);
 
 }

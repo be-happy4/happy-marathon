@@ -3,16 +3,23 @@ package cn.iocoder.yudao.module.system.service.game;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.module.system.controller.admin.game.vo.GamePageReqVO;
+import cn.iocoder.yudao.module.system.controller.admin.game.vo.GameRespVO;
 import cn.iocoder.yudao.module.system.controller.admin.game.vo.GameSaveReqVO;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.system.dal.dataobject.game.GameDO;
+import cn.iocoder.yudao.module.system.dal.dataobject.game.RegionDO;
 import cn.iocoder.yudao.module.system.dal.mysql.game.GameMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.GAME_NOT_FOUND;
@@ -65,6 +72,13 @@ public class GameServiceImpl implements GameService {
             return Collections.emptyList();
         }
         return gameMapper.selectByIds(ids);
+    }
+
+    @Override
+    public List<Long> getGameListByDateRange(LocalDate start, LocalDate end) {
+        return gameMapper.selectList(new LambdaQueryWrapperX<GameDO>()
+                .between(GameDO::getGameDate, start, end))
+                .stream().map(GameDO::getId).collect(Collectors.toList());
     }
 
     private void validateGameExists(Long id) {

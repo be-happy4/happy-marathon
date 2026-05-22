@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Schema(description = "管理后台 - 赛事报名 Response VO")
@@ -19,6 +20,9 @@ public class GameRegistrationRespVO {
     @Schema(description = "赛事名称", example = "2027上海马拉松")
     private String gameName;
 
+    @Schema(description = "比赛日期")
+    private LocalDate gameDate;
+
     @Schema(description = "用户编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     private Long userId;
 
@@ -30,6 +34,21 @@ public class GameRegistrationRespVO {
 
     @Schema(description = "参赛组别，字典 game_type", example = "marathon")
     private String gameType;
+
+    @Schema(description = "组别编号", example = "1")
+    private Long gameCategoryId;
+
+    @Schema(description = "组别名称", example = "全程马拉松")
+    private String gameCategoryName;
+
+    @Schema(description = "组别距离（米）")
+    private BigDecimal categoryDistanceM;
+
+    @Schema(description = "配速（/km），格式 MM:SS")
+    private String pace;
+
+    @Schema(description = "时速（km/h）")
+    private Double speed;
 
     @Schema(description = "个人优先级", example = "10")
     private Integer priority;
@@ -51,9 +70,6 @@ public class GameRegistrationRespVO {
 
     @Schema(description = "总排名", example = "500")
     private Integer overallPlace;
-
-    @Schema(description = "实际完成距离（公里）", example = "42.195")
-    private BigDecimal distanceKm;
 
     @Schema(description = "备注")
     private String remark;

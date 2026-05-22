@@ -7,8 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.math.BigDecimal;
-
 /**
  * 赛事个人报名表
  */
@@ -28,6 +26,8 @@ public class GameRegistrationDO extends TenantBaseDO {
     private String registrationStatus;
     /** 参赛组别，字典 game_type */
     private String gameType;
+    /** 组别编号，关联 system_game_category */
+    private Long gameCategoryId;
     /** 个人优先级 */
     private Integer priority;
     /** 个人标签，多个以逗号分隔，字典 game_tag */
@@ -42,8 +42,6 @@ public class GameRegistrationDO extends TenantBaseDO {
     private Integer genderPlace;
     /** 总排名 */
     private Integer overallPlace;
-    /** 实际完成距离（公里） */
-    private BigDecimal distanceKm;
     /** 备注 */
     private String remark;
 

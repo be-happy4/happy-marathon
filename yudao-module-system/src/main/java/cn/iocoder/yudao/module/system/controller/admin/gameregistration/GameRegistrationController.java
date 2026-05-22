@@ -1,7 +1,10 @@
 package cn.iocoder.yudao.module.system.controller.admin.gameregistration;
 
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
+import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.framework.excel.core.util.ExcelUtils;
+import cn.iocoder.yudao.module.system.controller.admin.gameregistration.vo.GameRegistrationExportVO;
 import cn.iocoder.yudao.module.system.controller.admin.gameregistration.vo.GameRegistrationPageReqVO;
 import cn.iocoder.yudao.module.system.controller.admin.gameregistration.vo.GameRegistrationRespVO;
 import cn.iocoder.yudao.module.system.controller.admin.gameregistration.vo.GameRegistrationSaveReqVO;
@@ -10,12 +13,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
@@ -75,6 +81,43 @@ public class GameRegistrationController {
     public CommonResult<PageResult<GameRegistrationRespVO>> getGameRegistrationPage(
             @Valid GameRegistrationPageReqVO pageReqVO) {
         return success(gameRegistrationService.getGameRegistrationPage(pageReqVO));
+    }
+
+    @GetMapping("/export-excel")
+    @Operation(summary = "导出报名 Excel")
+    @PreAuthorize("@ss.hasPermission('system:game-registration:export')")
+    public void exportExcel(@Valid GameRegistrationPageReqVO reqVO, HttpServletResponse response) throws IOException {
+        reqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
+        List<GameRegistrationRespVO> list = gameRegistrationService.getGameRegistrationPage(reqVO).getList();
+        List<GameRegistrationExportVO> exportList = list.stream().map(vo -> {
+            GameRegistrationExportVO export = new GameRegistrationExportVO();
+            export.setGameName(vo.getGameName());
+            export.setGameDate(vo.getGameDate() != null ? vo.getGameDate().toString() : null);
+            export.setUserNickname(vo.getUserNickname());
+            export.setRegistrationStatus(vo.getRegistrationStatus());
+            export.setGameCategoryName(vo.getGameCategoryName());
+            if (vo.getCategoryDistanceM() != null) {
+                export.setDistanceKm(vo.getCategoryDistanceM().divide(new java.math.BigDecimal("1000"), 4, java.math.RoundingMode.HALF_UP).toString());
+            }
+            export.setPace(vo.getPace());
+            export.setSpeed(vo.getSpeed());
+            export.setPriority(vo.getPriority());
+            export.setBibNumber(vo.getBibNumber());
+            export.setNetTime(vo.getNetTimeMs() != null ? formatMs(vo.getNetTimeMs()) : null);
+            export.setGunTime(vo.getGunTimeMs() != null ? formatMs(vo.getGunTimeMs()) : null);
+            export.setOverallPlace(vo.getOverallPlace());
+            export.setRemark(vo.getRemark());
+            return export;
+        }).collect(Collectors.toList());
+        ExcelUtils.write(response, "报名数据.xls", "报名", GameRegistrationExportVO.class, exportList);
+    }
+
+    private static String formatMs(Long ms) {
+        long totalSeconds = ms / 1000;
+        long h = totalSeconds / 3600;
+        long m = (totalSeconds % 3600) / 60;
+        long s = totalSeconds % 60;
+        return String.format("%d:%02d:%02d", h, m, s);
     }
 
 }
