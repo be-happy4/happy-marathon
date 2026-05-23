@@ -72,7 +72,6 @@ CREATE TABLE system_game_registration (
     game_id int8 NOT NULL,
     user_id int8 NOT NULL,
     registration_status varchar(32) NULL DEFAULT NULL,
-    game_type varchar(32) NULL DEFAULT NULL,
     priority int4 NULL DEFAULT NULL,
     tags varchar(500) NULL DEFAULT '',
     bib_number varchar(32) NULL DEFAULT NULL,
@@ -80,7 +79,6 @@ CREATE TABLE system_game_registration (
     net_time_ms int8 NULL DEFAULT NULL,
     gender_place int4 NULL DEFAULT NULL,
     overall_place int4 NULL DEFAULT NULL,
-    distance_km numeric(8, 3) NULL DEFAULT NULL,
     game_category_id int8 NULL DEFAULT NULL,
     remark varchar(500) NULL DEFAULT NULL,
     creator varchar(64) NULL DEFAULT '',
@@ -101,7 +99,6 @@ COMMENT ON COLUMN system_game_registration.id IS '报名编号';
 COMMENT ON COLUMN system_game_registration.game_id IS '赛事编号';
 COMMENT ON COLUMN system_game_registration.user_id IS '用户编号';
 COMMENT ON COLUMN system_game_registration.registration_status IS '个人报名状态，字典 game_registration_status';
-COMMENT ON COLUMN system_game_registration.game_type IS '参赛组别，字典 game_type';
 COMMENT ON COLUMN system_game_registration.priority IS '个人优先级';
 COMMENT ON COLUMN system_game_registration.tags IS '个人标签，多个以逗号分隔，字典 game_tag';
 COMMENT ON COLUMN system_game_registration.bib_number IS '参赛号码';
@@ -109,7 +106,6 @@ COMMENT ON COLUMN system_game_registration.gun_time_ms IS '枪声成绩（毫秒
 COMMENT ON COLUMN system_game_registration.net_time_ms IS '净成绩（毫秒）';
 COMMENT ON COLUMN system_game_registration.gender_place IS '性别排名';
 COMMENT ON COLUMN system_game_registration.overall_place IS '总排名';
-COMMENT ON COLUMN system_game_registration.distance_km IS '实际完成距离（公里）';
 COMMENT ON COLUMN system_game_registration.game_category_id IS '参赛组别编号，关联 system_game_category';
 COMMENT ON COLUMN system_game_registration.remark IS '备注';
 COMMENT ON COLUMN system_game_registration.creator IS '创建者';
@@ -131,7 +127,7 @@ CREATE TABLE system_game_category (
     id int8 NOT NULL,
     game_id int8 NOT NULL,
     game_type varchar(32) NULL DEFAULT NULL,
-    distance_km numeric(8, 3) NULL DEFAULT NULL,
+    distance_m numeric(10, 2) NULL DEFAULT NULL,
     creator varchar(64) NULL DEFAULT '',
     create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updater varchar(64) NULL DEFAULT '',
@@ -147,7 +143,7 @@ CREATE INDEX idx_system_game_category_01 ON system_game_category (game_id);
 COMMENT ON COLUMN system_game_category.id IS '组别编号';
 COMMENT ON COLUMN system_game_category.game_id IS '赛事编号';
 COMMENT ON COLUMN system_game_category.game_type IS '组别类型，字典 game_type';
-COMMENT ON COLUMN system_game_category.distance_km IS '该组别距离（公里）';
+COMMENT ON COLUMN system_game_category.distance_m IS '该组别距离（米）';
 COMMENT ON COLUMN system_game_category.creator IS '创建者';
 COMMENT ON COLUMN system_game_category.create_time IS '创建时间';
 COMMENT ON COLUMN system_game_category.updater IS '更新者';
@@ -211,7 +207,7 @@ INSERT INTO public.system_dict_data(id, sort, "label", value, dict_type, status,
      (4035, 1, '马拉松', 'marathon', 'game_category_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
      (4036, 2, '半程马拉松', 'half_marathon', 'game_category_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
      (4037, 3, '10km', '10km', 'game_category_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
-     (4038, 4, '自定义', 'custom', 'game_category_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0),
+     (4038, 4, '自定义', 'custom', 'game_category_type', 0, '', '', '', '1', '2026-05-11 00:00:00', '1', '2026-05-11 00:00:00', 0)
 ;
 
 -- 马拉松模块菜单（PostgreSQL）

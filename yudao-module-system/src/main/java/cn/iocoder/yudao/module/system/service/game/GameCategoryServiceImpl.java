@@ -48,11 +48,11 @@ public class GameCategoryServiceImpl implements GameCategoryService {
     }
 
     @Override
-    public List<GameCategoryDO> getCategoriesByGameIds(Collection<Long> gameIds) {
-        if (gameIds == null || gameIds.isEmpty()) {
+    public List<GameCategoryDO> getCategoriesByIds(Collection<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
             return Collections.emptyList();
         }
-        return gameCategoryMapper.selectByGameIds(gameIds);
+        return gameCategoryMapper.selectByIds(ids);
     }
 
     @Override

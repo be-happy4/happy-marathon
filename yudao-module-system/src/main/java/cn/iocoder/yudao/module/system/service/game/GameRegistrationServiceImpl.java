@@ -83,11 +83,6 @@ public class GameRegistrationServiceImpl implements GameRegistrationService {
 
     @Override
     public PageResult<GameRegistrationRespVO> getGameRegistrationPage(GameRegistrationPageReqVO pageReqVO) {
-        // Strip computed fields from sorting (not supported at DB level)
-        if (pageReqVO.getSortingFields() != null) {
-            pageReqVO.getSortingFields().removeIf(sf -> "speed".equals(sf.getField()));
-        }
-
         PageResult<GameRegistrationDO> pageResult = gameRegistrationMapper.selectPage(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return PageResult.empty(pageResult.getTotal());
@@ -100,7 +95,7 @@ public class GameRegistrationServiceImpl implements GameRegistrationService {
         Map<Long, GameDO> gameMap = CollectionUtils.convertMap(gameService.getGameList(gameIds), GameDO::getId);
         Map<Long, AdminUserDO> userMap = CollectionUtils.convertMap(adminUserService.getUserList(userIds), AdminUserDO::getId);
         Map<Long, GameCategoryDO> categoryMap = CollectionUtils.convertMap(
-                gameCategoryService.getCategoriesByGameIds(categoryIds), GameCategoryDO::getId);
+                gameCategoryService.getCategoriesByIds(categoryIds), GameCategoryDO::getId);
 
         // Build response VOs
         List<GameRegistrationRespVO> resultList = CollectionUtils.convertList(pageResult.getList(), registration -> {
@@ -134,7 +129,7 @@ public class GameRegistrationServiceImpl implements GameRegistrationService {
         Map<Long, GameDO> gameMap = CollectionUtils.convertMap(gameService.getGameList(gameIds), GameDO::getId);
         Map<Long, AdminUserDO> userMap = CollectionUtils.convertMap(adminUserService.getUserList(userIds), AdminUserDO::getId);
         Map<Long, GameCategoryDO> categoryMap = CollectionUtils.convertMap(
-                gameCategoryService.getCategoriesByGameIds(categoryIds), GameCategoryDO::getId);
+                gameCategoryService.getCategoriesByIds(categoryIds), GameCategoryDO::getId);
 
         GameRegistrationRespVO vo = BeanUtils.toBean(registration, GameRegistrationRespVO.class);
         GameDO game = gameMap.get(registration.getGameId());

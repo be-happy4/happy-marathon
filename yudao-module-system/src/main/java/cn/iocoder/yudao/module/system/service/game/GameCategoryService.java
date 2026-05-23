@@ -18,7 +18,7 @@ public interface GameCategoryService {
 
     List<GameCategoryDO> getCategoriesByGameId(Long gameId);
 
-    List<GameCategoryDO> getCategoriesByGameIds(Collection<Long> gameIds);
+    List<GameCategoryDO> getCategoriesByIds(Collection<Long> gameIds);
 
     PageResult<GameCategoryDO> getGameCategoryPage(GameCategoryPageReqVO pageReqVO);
 

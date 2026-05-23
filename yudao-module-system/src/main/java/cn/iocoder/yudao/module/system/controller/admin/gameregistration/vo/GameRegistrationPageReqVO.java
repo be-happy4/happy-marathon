@@ -35,9 +35,6 @@ public class GameRegistrationPageReqVO extends SortablePageParam {
     @Schema(description = "个人报名状态多选")
     private List<String> registrationStatuses;
 
-    @Schema(description = "参赛组别，字典 game_type", example = "marathon")
-    private String gameType;
-
     @Schema(description = "组别编号", example = "1")
     private Long gameCategoryId;
 

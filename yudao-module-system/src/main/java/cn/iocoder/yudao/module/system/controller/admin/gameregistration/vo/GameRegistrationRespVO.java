@@ -32,9 +32,6 @@ public class GameRegistrationRespVO {
     @Schema(description = "个人报名状态，字典 game_registration_status", example = "registered")
     private String registrationStatus;
 
-    @Schema(description = "参赛组别，字典 game_type", example = "marathon")
-    private String gameType;
-
     @Schema(description = "组别编号", example = "1")
     private Long gameCategoryId;
 

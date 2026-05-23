@@ -17,9 +17,7 @@ public interface GameRegistrationMapper extends BaseMapperX<GameRegistrationDO> 
                 .inIfPresent(GameRegistrationDO::getGameId, reqVO.getGameIds())
                 .eqIfPresent(GameRegistrationDO::getUserId, reqVO.getUserId())
                 .eqIfPresent(GameRegistrationDO::getRegistrationStatus, reqVO.getRegistrationStatus())
-                .inIfPresent(GameRegistrationDO::getRegistrationStatus, reqVO.getRegistrationStatuses())
-                .eqIfPresent(GameRegistrationDO::getGameType, reqVO.getGameType())
-                .eqIfPresent(GameRegistrationDO::getGameCategoryId, reqVO.getGameCategoryId())
+                .inIfPresent(GameRegistrationDO::getRegistrationStatus, reqVO.getRegistrationStatuses())                .eqIfPresent(GameRegistrationDO::getGameCategoryId, reqVO.getGameCategoryId())
                 .inIfPresent(GameRegistrationDO::getGameCategoryId, reqVO.getGameCategoryIds())
                 // LEFT JOIN game for date filter
                 .leftJoin(GameDO.class, GameDO::getId, GameRegistrationDO::getGameId)

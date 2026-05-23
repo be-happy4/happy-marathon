@@ -24,8 +24,6 @@ public class GameRegistrationDO extends TenantBaseDO {
     private Long userId;
     /** 个人报名状态，字典 game_registration_status */
     private String registrationStatus;
-    /** 参赛组别，字典 game_type */
-    private String gameType;
     /** 组别编号，关联 system_game_category */
     private Long gameCategoryId;
     /** 个人优先级 */

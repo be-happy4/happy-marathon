@@ -136,6 +136,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Netty macOS 原生 DNS 解析器 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-aarch_64</classifier>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- 服务保障相关 -->
         <dependency>
             <groupId>cn.iocoder.boot</groupId>
@@ -160,6 +168,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <jvmArguments>--enable-native-access=ALL-UNNAMED</jvmArguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
