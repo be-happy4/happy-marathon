@@ -25,7 +25,7 @@ No Maven wrapper — use the system-installed `mvn`. The project requires JDK 25
 
 ## Project overview
 
-This is **Yudao** (芋道), a forked/evolved version of ruoyi-vue-pro — a Spring Boot 3 multi-module rapid development platform. **Currently active modules**: `system`, `infra`. All other modules are commented out in root `pom.xml`.
+This is **Yudao** (芋道), a forked/evolved version of ruoyi-vue-pro — a Spring Boot 3 multi-module rapid development platform. **Currently active modules**: `system`, `infra`, `crawler`. All other modules are commented out in root `pom.xml`.
 
 **Local dependencies**: PostgreSQL (`127.0.0.1:5432/marathon`, user `postgres`/`root`) + Redis (`127.0.0.1:6379`).
 
@@ -41,3 +41,5 @@ Detailed documentation is organized under `.claude/knowledge/`:
 | [testing.md](.claude/knowledge/testing.md) | Test base classes and how to run tests |
 | [game-module.md](.claude/knowledge/game-module.md) | Game module (赛事管理): tables, Java files, dictionary codes, server-side sorting |
 | [frontend.md](.claude/knowledge/frontend.md) | Frontend project structure and patterns |
+| [crawler-design.md](.claude/knowledge/crawler-design.md) | Crawler architecture design, data model, ETL consistency plan |
+| [crawler-module.md](.claude/knowledge/crawler-module.md) | Crawler module code reference: tables, Java files, API endpoints |

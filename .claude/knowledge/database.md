@@ -1,8 +1,17 @@
 # Database
 
+> **多端同步**：本文件随 git 同步，换电脑 clone 后即可生效。另一台电脑的数据库连接信息可能不同，修改 `application-local.yaml` 后请同步更新下方连接信息。
+
 Configured in `application-local.yaml` with **dynamic datasource** (`master` + `slave`). Currently uses **PostgreSQL** on `127.0.0.1:5432/marathon`. SQL init scripts for all supported databases live in `sql/` (MySQL, PostgreSQL, Oracle, DM, OpenGauss, SQL Server, Kingbase).
 
 MyBatis Plus `id-type: NONE` — the `IdTypeEnvironmentPostProcessor` auto-detects the database type and switches between AUTO (MySQL) and INPUT (Oracle/PostgreSQL/Kingbase).
+
+## Quick connect
+
+```bash
+psql -h 127.0.0.1 -p 5432 -U postgres -d marathon
+# Password: root
+```
 
 ## Connection info (local profile)
 
@@ -13,8 +22,13 @@ MyBatis Plus `id-type: NONE` — the `IdTypeEnvironmentPostProcessor` auto-detec
 | Database | `marathon` |
 | Username | `postgres` |
 | Password | `root` |
+| Redis Host | `127.0.0.1:6379` |
+| Redis DB | `0` |
+| Server Port | `48080` |
 
 Full connection string: `jdbc:postgresql://127.0.0.1:5432/marathon`
+
+配置文件位置：`yudao-server/src/main/resources/application-local.yaml`
 
 ## CSV → Database mapping rules
 

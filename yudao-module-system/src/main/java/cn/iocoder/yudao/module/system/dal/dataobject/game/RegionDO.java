@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.system.dal.dataobject.game;
 
-import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
+import cn.iocoder.yudao.framework.tenant.core.db.TenantBaseDO;
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @KeySequence("system_region_seq")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class RegionDO extends BaseDO {
+public class RegionDO extends TenantBaseDO {
 
     @TableId
     private Long id;

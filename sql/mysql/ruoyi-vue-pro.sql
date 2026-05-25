@@ -4542,6 +4542,10 @@ INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_t
 INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6369, 2, 6404, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
 INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6370, 2, 6405, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
 INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6371, 2, 6406, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
+INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6372, 2, 6407, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
+INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6373, 2, 6408, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
+INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6374, 2, 6409, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
+INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6375, 2, 6410, '1', '2026-05-09 16:11:01', '1', '2026-05-09 16:11:01', b'0', 1);
 INSERT INTO `system_role_menu` (`id`, `role_id`, `menu_id`, `creator`, `create_time`, `updater`, `update_time`, `deleted`, `tenant_id`) VALUES (6380, 2, 6490, '1', '2026-05-14 09:36:12', '1', '2026-05-14 09:36:12', b'0', 1);
 COMMIT;
 

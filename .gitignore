@@ -56,3 +56,6 @@ node_modules/
 .vscode/
 .DS_Store
 package-lock.json
+
+# Crawler
+scripts/crawler/__pycache__/
