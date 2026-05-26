@@ -43,3 +43,19 @@ Detailed documentation is organized under `.claude/knowledge/`:
 | [frontend.md](.claude/knowledge/frontend.md) | Frontend project structure and patterns |
 | [crawler-design.md](.claude/knowledge/crawler-design.md) | Crawler architecture design, data model, ETL consistency plan |
 | [crawler-module.md](.claude/knowledge/crawler-module.md) | Crawler module code reference: tables, Java files, API endpoints |
+
+## Git Convention
+
+Format: `type(scope): description`
+
+| Type | Usage |
+|------|-------|
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `chore` | Maintenance, tooling |
+
+Scope: module name (`crawler`, `game`, `system`, etc.). No scope for cross-cutting.
+
+Examples: `feat(crawler): add runchina data source` / `fix(crawler): tenant filtering`
+
+Two repos: `happy-marathon-server` and `happy-marathon-ui`. Commit separately.
