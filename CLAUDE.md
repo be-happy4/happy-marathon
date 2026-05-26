@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Unified monorepo: backend (Spring Boot) + frontend (Vue 3) in `yudao-ui/yudao-ui-admin-vue3/`.
+
 ## Build & Run
 
 ```bash
@@ -22,6 +24,11 @@ mvn test -pl yudao-module-system
 ```
 
 No Maven wrapper — use the system-installed `mvn`. The project requires JDK 25 and uses `application-local.yaml` (the default active profile). The server starts on port **48080**.
+
+```bash
+# Start frontend dev server (port 81)
+cd yudao-ui/yudao-ui-admin-vue3 && pnpm install && pnpm dev
+```
 
 ## Project overview
 
