@@ -51,6 +51,13 @@ Detailed documentation is organized under `.claude/knowledge/`:
 | [crawler-design.md](.claude/knowledge/crawler-design.md) | Crawler architecture design, data model, ETL consistency plan |
 | [crawler-module.md](.claude/knowledge/crawler-module.md) | Crawler module code reference: tables, Java files, API endpoints |
 
+## Git Remotes
+
+- `origin`: https://github.com/be-happy4/happy-marathon (fork)
+- `upstream`: https://github.com/YunaiV/ruoyi-vue-pro (Yudao upstream)
+
+Sync upstream: `git fetch upstream && git merge upstream/master-jdk17` (only framework/business modules; resolve conflicts in game/crawler/frontend manually).
+
 ## Git Convention
 
 Format: `type(scope): description`
