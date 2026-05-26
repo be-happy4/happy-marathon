@@ -1,11 +1,12 @@
 package cn.iocoder.yudao.module.crawler.dal.dataobject;
 
 import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
+import cn.iocoder.yudao.framework.tenant.core.aop.TenantIgnore;
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import cn.iocoder.yudao.module.crawler.dal.handler.JsonbTypeHandler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @KeySequence("crawler_game_result_seq")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@TenantIgnore
 public class CrawlerGameResultDO extends BaseDO {
 
     @TableId
@@ -79,7 +81,7 @@ public class CrawlerGameResultDO extends BaseDO {
     private Integer categoryRank;
 
     /** 完整原始数据 JSON */
-    @TableField(typeHandler = JacksonTypeHandler.class)
+    @TableField(typeHandler = JsonbTypeHandler.class)
     private String rawData;
 
     /** 匹配状态：UNMATCHED / MATCHED / CONFLICT / DUPLICATE */

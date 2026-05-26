@@ -23,4 +23,7 @@ public interface CrawlerSourceService {
 
     /** 更新最近执行状态 */
     void updateLastRun(Long sourceId, String status, String summary);
+
+    /** 根据 sourceKey 查找数据源 */
+    CrawlerSourceDO getSourceByKey(String sourceKey);
 }

@@ -57,13 +57,14 @@ public class CrawlGameJob implements JobHandler {
             taskLog.setCrawlMode("INCREMENTAL");
 
             try {
+                Long sourceId = sourceService.getSourceByKey(crawler.getSourceKey()).getId();
+                taskLog.setSourceId(sourceId);
                 Long logId = taskLogService.createLog(taskLog);
 
                 List<cn.iocoder.yudao.module.crawler.core.CrawlResult> results =
                         crawler.crawl(CrawlerContext.incremental(null));
 
-                PipelineStats stats = gamePipeline.process(
-                        crawler.getSourceKey() != null ? 0L : 0, // sourceId from DB lookup
+                PipelineStats stats = gamePipeline.process(sourceId,
                         crawler.getSourceKey(), results);
 
                 taskLogService.updateLogResult(logId, "SUCCESS",

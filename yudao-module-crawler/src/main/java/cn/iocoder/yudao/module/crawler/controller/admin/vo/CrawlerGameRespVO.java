@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.crawler.controller.admin.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class CrawlerGameRespVO {
     private String nameEn;
 
     @Schema(description = "比赛日期")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate gameDate;
 
     @Schema(description = "地区名称")
@@ -52,12 +54,14 @@ public class CrawlerGameRespVO {
     private String importStatus;
 
     @Schema(description = "导入时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime importTime;
 
     @Schema(description = "导入后赛事 ID")
     private Long importGameId;
 
     @Schema(description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     @Schema(description = "组别列表")

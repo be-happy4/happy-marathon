@@ -17,7 +17,10 @@ public interface CrawlerGameMapper extends BaseMapperX<CrawlerGameDO> {
         return selectPage(reqVO, new LambdaQueryWrapperX<CrawlerGameDO>()
                 .likeIfPresent(CrawlerGameDO::getName, reqVO.getName())
                 .eqIfPresent(CrawlerGameDO::getSourceId, reqVO.getSourceId())
-                .eqIfPresent(CrawlerGameDO::getImportStatus, reqVO.getImportStatus())
+                .inIfPresent(CrawlerGameDO::getWorldAthleticsLevel, reqVO.getWorldAthleticsLevels())
+                .inIfPresent(CrawlerGameDO::getChinaRoadRunLevel, reqVO.getChinaRoadRunLevels())
+                .inIfPresent(CrawlerGameDO::getStatus, reqVO.getStatuses())
+                .inIfPresent(CrawlerGameDO::getImportStatus, reqVO.getImportStatuses())
                 .betweenIfPresent(CrawlerGameDO::getGameDate, reqVO.getGameDate())
                 .orderByDesc(CrawlerGameDO::getId));
     }

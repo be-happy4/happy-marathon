@@ -5,6 +5,7 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.crawler.controller.admin.vo.*;
 import cn.iocoder.yudao.module.crawler.convert.CrawlerSourceConvert;
 import cn.iocoder.yudao.module.crawler.dal.dataobject.CrawlerSourceDO;
+import cn.iocoder.yudao.module.crawler.job.CrawlGameJob;
 import cn.iocoder.yudao.module.crawler.service.CrawlerSourceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,6 +25,9 @@ public class CrawlerSourceController {
 
     @Resource
     private CrawlerSourceService crawlerSourceService;
+
+    @Resource
+    private CrawlGameJob crawlGameJob;
 
     @PostMapping("/create")
     @Operation(summary = "创建数据源")
@@ -62,5 +66,13 @@ public class CrawlerSourceController {
     public CommonResult<PageResult<CrawlerSourceRespVO>> getSourcePage(@Valid CrawlerSourcePageReqVO pageReqVO) {
         PageResult<CrawlerSourceDO> page = crawlerSourceService.getSourcePage(pageReqVO);
         return success(CrawlerSourceConvert.INSTANCE.convertPage(page));
+    }
+
+    @PostMapping("/trigger-game-crawl")
+    @Operation(summary = "手动触发赛事爬取")
+    @PreAuthorize("@ss.hasPermission('crawler:source:update')")
+    public CommonResult<String> triggerGameCrawl() {
+        String result = crawlGameJob.execute(null);
+        return success(result);
     }
 }

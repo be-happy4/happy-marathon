@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.crawler.controller.admin.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -22,9 +23,11 @@ public class CrawlerTaskLogRespVO {
     private String crawlMode;
 
     @Schema(description = "开始时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     @Schema(description = "结束时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
 
     @Schema(description = "状态")
@@ -49,5 +52,6 @@ public class CrawlerTaskLogRespVO {
     private String etlVersion;
 
     @Schema(description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

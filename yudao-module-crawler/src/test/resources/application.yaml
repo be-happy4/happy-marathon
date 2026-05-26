@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: yudao-server
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+
+  main:
+    lazy-initialization: true
+    banner-mode: off
+    allow-circular-references: true
+
+  servlet:
+    multipart:
+      max-file-size: 16MB
+      max-request-size: 32MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+      write-date-timestamps-as-nanoseconds: false
+      write-durations-as-timestamps: true
+      fail-on-empty-beans: false
+
+  cache:
+    type: REDIS
+
+  datasource:
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          url: jdbc:postgresql://127.0.0.1:5432/marathon
+          username: postgres
+          password: root
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+
+mybatis-plus:
+  lazy-initialization: true
+
+yudao:
+  info:
+    base-package: cn.iocoder.yudao
+  web:
+    admin-ui:
+      url: http://localhost:48080
+  security:
+    enabled: false

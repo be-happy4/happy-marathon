@@ -4,8 +4,10 @@ import cn.iocoder.yudao.module.crawler.dal.dataobject.CrawlerGameResultDO;
 import cn.iocoder.yudao.module.crawler.dal.mysql.CrawlerGameResultMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +18,8 @@ import java.util.List;
 @Slf4j
 public class MatchEngine {
 
-    @Resource
-    private List<MatchStrategy> strategies;
+    @Autowired(required = false)
+    private List<MatchStrategy> strategies = new ArrayList<>();
 
     @Resource
     private CrawlerGameResultMapper crawlerGameResultMapper;

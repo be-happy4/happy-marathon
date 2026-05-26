@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.crawler.controller.admin.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -53,6 +54,7 @@ public class CrawlerSourceRespVO {
     private Integer sortOrder;
 
     @Schema(description = "最近执行时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastRunTime;
 
     @Schema(description = "最近执行状态")
@@ -62,5 +64,6 @@ public class CrawlerSourceRespVO {
     private String lastRunSummary;
 
     @Schema(description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

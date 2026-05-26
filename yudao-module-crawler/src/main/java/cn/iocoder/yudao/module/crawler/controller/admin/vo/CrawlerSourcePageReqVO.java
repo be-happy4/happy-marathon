@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.crawler.controller.admin.vo;
 
-import cn.iocoder.yudao.framework.common.pojo.PageParam;
+import cn.iocoder.yudao.framework.common.pojo.SortablePageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CrawlerSourcePageReqVO extends PageParam {
+public class CrawlerSourcePageReqVO extends SortablePageParam {
 
     @Schema(description = "数据源名称", example = "数字心动")
     private String name;

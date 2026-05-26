@@ -19,4 +19,8 @@ public interface CrawlerSourceMapper extends BaseMapperX<CrawlerSourceDO> {
                 .eqIfPresent(CrawlerSourceDO::getEnabled, reqVO.getEnabled())
                 .orderByAsc(CrawlerSourceDO::getSortOrder));
     }
+
+    default CrawlerSourceDO selectBySourceKey(String sourceKey) {
+        return selectOne(CrawlerSourceDO::getSourceKey, sourceKey);
+    }
 }

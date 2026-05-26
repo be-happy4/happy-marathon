@@ -69,6 +69,11 @@ public class CrawlerSourceServiceImpl implements CrawlerSourceService {
     }
 
     @Override
+    public CrawlerSourceDO getSourceByKey(String sourceKey) {
+        return crawlerSourceMapper.selectBySourceKey(sourceKey);
+    }
+
+    @Override
     public void updateLastRun(Long sourceId, String status, String summary) {
         CrawlerSourceDO entity = crawlerSourceMapper.selectById(sourceId);
         if (entity != null) {

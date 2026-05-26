@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * 运行：需要 Spring Boot 上下文 + 代理配置
  */
-@SpringBootTest(classes = {cn.iocoder.yudao.server.YudaoServerApplication.class})
+@SpringBootTest(classes = {cn.iocoder.yudao.module.crawler.CrawlerTestApplication.class})
 class WorldAthleticsCrawlerDBIT {
 
     @Resource

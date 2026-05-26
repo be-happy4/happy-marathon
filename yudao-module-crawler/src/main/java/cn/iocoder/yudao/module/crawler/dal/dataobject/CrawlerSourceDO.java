@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.crawler.dal.dataobject;
 
 import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
+import cn.iocoder.yudao.framework.tenant.core.aop.TenantIgnore;
 import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -19,6 +20,7 @@ import java.util.Map;
 @KeySequence("crawler_source_seq")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@TenantIgnore
 public class CrawlerSourceDO extends BaseDO {
 
     @TableId

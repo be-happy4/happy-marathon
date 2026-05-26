@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.crawler.controller.admin.vo;
 
-import cn.iocoder.yudao.framework.common.pojo.PageParam;
+import cn.iocoder.yudao.framework.common.pojo.SortablePageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CrawlerTaskLogPageReqVO extends PageParam {
+public class CrawlerTaskLogPageReqVO extends SortablePageParam {
 
     @Schema(description = "数据源 ID")
     private Long sourceId;
