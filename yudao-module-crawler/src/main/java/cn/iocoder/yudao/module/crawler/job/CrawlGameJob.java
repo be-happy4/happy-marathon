@@ -45,6 +45,16 @@ public class CrawlGameJob implements JobHandler {
             return "无已注册的赛事爬虫";
         }
 
+        // 如果传了 sourceKey，只跑指定爬虫
+        if (param != null && !param.isBlank()) {
+            crawlers = crawlers.stream()
+                    .filter(c -> c.getSourceKey().equals(param))
+                    .toList();
+            if (crawlers.isEmpty()) {
+                return "未找到数据源: " + param;
+            }
+        }
+
         int totalNew = 0;
         int totalUpdated = 0;
         int totalIgnored = 0;

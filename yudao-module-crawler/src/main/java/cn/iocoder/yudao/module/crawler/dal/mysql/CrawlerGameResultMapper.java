@@ -17,12 +17,11 @@ public interface CrawlerGameResultMapper extends BaseMapperX<CrawlerGameResultDO
     default PageResult<CrawlerGameResultDO> selectPage(CrawlerGameResultPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<CrawlerGameResultDO>()
                 .eqIfPresent(CrawlerGameResultDO::getSourceId, reqVO.getSourceId())
-                .eqIfPresent(CrawlerGameResultDO::getMatchStatus, reqVO.getMatchStatus())
-                .eqIfPresent(CrawlerGameResultDO::getImportStatus, reqVO.getImportStatus())
+                .inIfPresent(CrawlerGameResultDO::getMatchStatus, reqVO.getMatchStatuses())
+                .inIfPresent(CrawlerGameResultDO::getImportStatus, reqVO.getImportStatuses())
                 .likeIfPresent(CrawlerGameResultDO::getName, reqVO.getName())
                 .likeIfPresent(CrawlerGameResultDO::getGameName, reqVO.getGameName())
-                .eqIfPresent(CrawlerGameResultDO::getIdCard, reqVO.getIdCard())
-                .orderByDesc(CrawlerGameResultDO::getId));
+                .eqIfPresent(CrawlerGameResultDO::getIdCard, reqVO.getIdCard()));
     }
 
     default CrawlerGameResultDO selectByUniqueKey(Long crawlerGameId, Long crawlerCategoryId, String idCard) {

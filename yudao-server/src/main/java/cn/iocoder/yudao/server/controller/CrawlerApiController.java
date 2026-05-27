@@ -56,8 +56,22 @@ public class CrawlerApiController {
 
     @PostMapping("/source/trigger-game-crawl")
     @Operation(summary = "手动触发赛事爬取")
-    public CommonResult<String> triggerGameCrawl() {
-        return success(crawlGameJob.execute(null));
+    public CommonResult<String> triggerGameCrawl(@RequestParam(value = "sourceKey", required = false) String sourceKey) {
+        return success(crawlGameJob.execute(sourceKey));
+    }
+
+    @GetMapping("/source/get")
+    @Operation(summary = "获取数据源详情")
+    public CommonResult<CrawlerSourceRespVO> getSource(@RequestParam("id") Long id) {
+        CrawlerSourceDO source = crawlerSourceService.getSource(id);
+        return success(CrawlerSourceConvert.INSTANCE.convert(source));
+    }
+
+    @PutMapping("/source/update")
+    @Operation(summary = "更新数据源")
+    public CommonResult<Boolean> updateSource(@Valid @RequestBody CrawlerSourceSaveReqVO reqVO) {
+        crawlerSourceService.updateSource(reqVO);
+        return success(true);
     }
 
     // ===== TaskLog 任务日志 =====

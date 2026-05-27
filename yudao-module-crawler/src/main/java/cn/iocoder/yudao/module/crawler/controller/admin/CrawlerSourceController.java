@@ -71,8 +71,8 @@ public class CrawlerSourceController {
     @PostMapping("/trigger-game-crawl")
     @Operation(summary = "手动触发赛事爬取")
     @PreAuthorize("@ss.hasPermission('crawler:source:update')")
-    public CommonResult<String> triggerGameCrawl() {
-        String result = crawlGameJob.execute(null);
+    public CommonResult<String> triggerGameCrawl(@RequestParam(value = "sourceKey", required = false) String sourceKey) {
+        String result = crawlGameJob.execute(sourceKey);
         return success(result);
     }
 }
