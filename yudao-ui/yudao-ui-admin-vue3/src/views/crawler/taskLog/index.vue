@@ -88,6 +88,7 @@ import * as CrawlerSourceApi from '@/api/crawler/source'
 
 defineOptions({ name: 'CrawlerTaskLog' })
 
+const route = useRoute()
 const message = useMessage()
 const queryFormRef = ref()
 
@@ -138,6 +139,10 @@ const showDetail = (row: CrawlerTaskLogVO) => {
 }
 
 onMounted(() => {
+  const srcId = route.query.sourceId
+  if (srcId) {
+    queryParams.sourceId = Number(srcId)
+  }
   getSources()
   getList()
 })

@@ -8,7 +8,13 @@
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
       <el-table-column align="center" label="编号" prop="id" width="80" />
-      <el-table-column label="地区名称" prop="name" min-width="200" />
+      <el-table-column label="地区名称" prop="name" min-width="200">
+        <template #default="scope">
+          <el-tooltip :content="scope.row.breadcrumb" placement="top" :disabled="!scope.row.breadcrumb">
+            <span>{{ scope.row.name }}</span>
+          </el-tooltip>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="ISO 代码" prop="code" width="120" />
       <el-table-column align="center" label="类型" prop="type" width="100">
         <template #default="scope">

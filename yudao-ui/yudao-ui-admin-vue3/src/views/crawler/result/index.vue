@@ -8,16 +8,16 @@
       <el-form-item label="赛事" prop="gameName">
         <el-input v-model="queryParams.gameName" placeholder="搜索赛事" clearable style="width:160px" @keyup.enter="handleQuery" />
       </el-form-item>
-      <el-form-item label="匹配状态" prop="matchStatus">
-        <el-select v-model="queryParams.matchStatus" placeholder="全部" clearable style="width:130px">
+      <el-form-item label="匹配状态" prop="matchStatuses">
+        <el-select v-model="queryParams.matchStatuses" multiple clearable collapse-tags collapse-tags-tooltip placeholder="全部" style="width:200px">
           <el-option label="未匹配" value="UNMATCHED" />
           <el-option label="已匹配" value="MATCHED" />
           <el-option label="冲突" value="CONFLICT" />
           <el-option label="重复" value="DUPLICATE" />
         </el-select>
       </el-form-item>
-      <el-form-item label="导入状态" prop="importStatus">
-        <el-select v-model="queryParams.importStatus" placeholder="全部" clearable style="width:130px">
+      <el-form-item label="导入状态" prop="importStatuses">
+        <el-select v-model="queryParams.importStatuses" multiple clearable collapse-tags collapse-tags-tooltip placeholder="全部" style="width:200px">
           <el-option label="待导入" value="PENDING" />
           <el-option label="已确认" value="CONFIRMED" />
           <el-option label="已忽略" value="IGNORED" />
@@ -32,12 +32,12 @@
 
   <!-- 成绩列表 -->
   <ContentWrap title="爬取成绩列表">
-    <el-table v-loading="loading" :data="list" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="list" @sort-change="handleSortChange" @selection-change="handleSelectionChange" :default-sort="{prop: 'createTime', order: 'descending'}">
       <el-table-column type="selection" width="55" />
       <el-table-column label="ID" align="center" prop="id" width="80" />
       <el-table-column label="选手姓名" align="center" prop="name" width="120" />
       <el-table-column label="赛事" align="center" prop="gameName" min-width="180" show-overflow-tooltip />
-      <el-table-column label="比赛日期" align="center" prop="gameDate" width="120" />
+      <el-table-column label="比赛日期" align="center" prop="gameDate" sortable="custom" width="120" />
       <el-table-column label="参赛号" align="center" prop="bibNumber" width="100" />
       <el-table-column label="性别" align="center" prop="gender" width="60" />
       <el-table-column label="枪声成绩" align="center" width="100">
@@ -50,7 +50,7 @@
           {{ scope.row.netTimeMs != null ? formatMs(scope.row.netTimeMs) : '-' }}
         </template>
       </el-table-column>
-      <el-table-column label="排名" align="center" prop="rank" width="70" />
+      <el-table-column label="排名" align="center" prop="rank" sortable="custom" width="70" />
       <el-table-column label="匹配状态" align="center" width="100">
         <template #default="scope">
           <el-tag :type="matchTagType(scope.row.matchStatus)" size="small">
@@ -67,7 +67,7 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="170" />
+      <el-table-column label="创建时间" align="center" prop="createTime" sortable="custom" width="170" />
     </el-table>
     <Pagination v-model:limit="queryParams.pageSize" v-model:page="queryParams.pageNo"
       :total="total" @pagination="getList" />
@@ -75,6 +75,7 @@
 </template>
 
 <script lang="ts" setup>
+import { buildSortingField } from '@/utils'
 import * as CrawlerResultApi from '@/api/crawler/result'
 import type { CrawlerGameResultVO } from '@/api/crawler/result'
 
@@ -91,8 +92,9 @@ const queryParams = reactive({
   pageSize: 10,
   name: undefined as string | undefined,
   gameName: undefined as string | undefined,
-  matchStatus: undefined as string | undefined,
-  importStatus: undefined as string | undefined
+  matchStatuses: [] as string[],
+  importStatuses: [] as string[],
+  sortingFields: [] as { field: string; order: string }[]
 })
 
 const getList = async () => {
@@ -108,6 +110,11 @@ const getList = async () => {
 
 const handleQuery = () => { queryParams.pageNo = 1; getList() }
 const resetQuery = () => { queryFormRef.value?.resetFields(); handleQuery() }
+
+const handleSortChange = (params: any) => {
+  queryParams.sortingFields = [buildSortingField(params)]
+  handleQuery()
+}
 
 const handleSelectionChange = (rows: CrawlerGameResultVO[]) => {
   selectedRows.value = rows

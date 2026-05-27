@@ -31,6 +31,8 @@
     "@iconify/vue": "^5.0.1",
     "@microsoft/fetch-event-source": "^2.0.1",
     "@videojs-player/vue": "^1.0.0",
+    "@vue-js-cron/core": "^6.3.0",
+    "@vue-js-cron/element-plus": "^3.1.11",
     "@vueuse/core": "^14.3.0",
     "@wangeditor-next/editor": "^5.7.0",
     "@wangeditor-next/editor-for-vue": "^5.1.14",
@@ -153,5 +155,6 @@
   "engines": {
     "node": ">= 20.19.0",
     "pnpm": ">=8.6.0"
-  }
+  },
+  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }

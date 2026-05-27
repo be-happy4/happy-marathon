@@ -41,6 +41,6 @@ export const deleteSource = (id: number) => {
   return request.delete({ url: '/crawler/source/delete?id=' + id })
 }
 
-export const triggerGameCrawl = () => {
-  return request.post({ url: '/crawler/source/trigger-game-crawl' })
+export const triggerGameCrawl = (sourceKey?: string) => {
+  return request.post({ url: '/crawler/source/trigger-game-crawl', params: sourceKey ? { sourceKey } : {} })
 }

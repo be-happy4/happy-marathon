@@ -170,7 +170,13 @@
           <dict-tag :type="DICT_TYPE.GAME_STATUS" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column align="center" label="地区" prop="regionName" min-width="120" show-overflow-tooltip />
+      <el-table-column align="center" label="地区" prop="regionName" min-width="120">
+        <template #default="scope">
+          <el-tooltip :content="scope.row.regionBreadcrumb" placement="top" :disabled="!scope.row.regionBreadcrumb">
+            <span>{{ scope.row.regionName }}</span>
+          </el-tooltip>
+        </template>
+      </el-table-column>
       <el-table-column
         align="center"
         label="创建时间"

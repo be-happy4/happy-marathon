@@ -12,6 +12,7 @@ export interface GameVO {
   url?: string
   regionId?: number
   regionName?: string
+  regionBreadcrumb?: string
   remark?: string
   createTime?: Date
 }

@@ -5,6 +5,7 @@ export interface RegionNodeVO {
   name: string
   code?: string
   type?: number
+  breadcrumb?: string
   children?: RegionNodeVO[]
 }
 
