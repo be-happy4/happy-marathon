@@ -37,6 +37,13 @@
             <artifactId>yudao-spring-boot-starter-job</artifactId>
         </dependency>
 
+        <!-- Playwright 浏览器自动化（个人成绩查询） -->
+        <dependency>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>1.48.0</version>
+        </dependency>
+
         <!-- Test 测试相关 -->
         <dependency>
             <groupId>cn.iocoder.boot</groupId>

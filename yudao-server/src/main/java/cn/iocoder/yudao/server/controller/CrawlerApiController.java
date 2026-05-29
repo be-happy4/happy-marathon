@@ -109,4 +109,16 @@ public class CrawlerApiController {
         PageResult<CrawlerGameResultDO> page = crawlerGameResultService.getResultPage(reqVO);
         return success(CrawlerGameResultConvert.INSTANCE.convertPage(page));
     }
+
+    // ===== Personal Score 个人成绩查询 =====
+
+    @Resource
+    private cn.iocoder.yudao.module.crawler.service.PersonalScoreQueryService personalScoreQueryService;
+
+    @PostMapping("/personal-score/query")
+    @Operation(summary = "根据姓名+证件号查询个人成绩")
+    public CommonResult<cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreQueryRespVO> queryPersonalScore(
+            @Valid @RequestBody cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreQueryReqVO reqVO) {
+        return success(personalScoreQueryService.query(reqVO));
+    }
 }

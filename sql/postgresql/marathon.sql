@@ -583,3 +583,17 @@ INSERT INTO system_region (id, name, code, type, parent_id, sort, creator, creat
 (270, '香港特别行政区', 'CN-HK', 3, 53, 270, '1', NOW(), '1', NOW(), 0, 0),
 (271, '澳门特别行政区', 'CN-MO', 3, 53, 271, '1', NOW(), '1', NOW(), 0, 0),
 (272, '台湾省', 'CN-TW', 3, 53, 272, '1', NOW(), '1', NOW(), 0, 0);
+
+-- ============================================================
+-- system_users 扩展字段：个人身份信息（用于爬虫成绩匹配）
+-- ============================================================
+ALTER TABLE system_users ADD COLUMN IF NOT EXISTS real_name varchar(64);
+ALTER TABLE system_users ADD COLUMN IF NOT EXISTS id_card varchar(32);
+ALTER TABLE system_users ADD COLUMN IF NOT EXISTS birthday date;
+
+-- ============================================================
+-- crawler_source：个人成绩查询数据源
+-- ============================================================
+INSERT INTO crawler_source (id, name, source_key, crawl_type, source_type, handler_type, enabled,  creator, create_time, updater, update_time, deleted)
+VALUES (nextval('crawler_source_seq'), '中国马拉松官网-个人成绩查询', 'runchina_personal', 'RESULT', 'OFFICIAL', 'CUSTOM', true, '1', NOW(), '1', NOW(), 0)
+ON CONFLICT (source_key) DO NOTHING;

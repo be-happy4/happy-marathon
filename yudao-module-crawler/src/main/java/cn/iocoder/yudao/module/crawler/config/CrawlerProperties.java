@@ -26,9 +26,20 @@ public class CrawlerProperties {
     /** 重试配置 */
     private Retry retry = new Retry();
 
+    /** Playwright 浏览器配置 */
+    private Playwright playwright = new Playwright();
+
     @Data
     public static class Retry {
         private int maxAttempts = 3;
         private Duration backoff = Duration.ofSeconds(5);
+    }
+
+    @Data
+    public static class Playwright {
+        /** 是否无头模式，默认 false（方便开发调试） */
+        private boolean headless = false;
+        /** 浏览器超时 */
+        private Duration timeout = Duration.ofSeconds(60);
     }
 }

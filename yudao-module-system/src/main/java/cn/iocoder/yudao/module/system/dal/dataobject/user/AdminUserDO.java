@@ -92,5 +92,17 @@ public class AdminUserDO extends TenantBaseDO {
      * 最后登录时间
      */
     private LocalDateTime loginDate;
+    /**
+     * 真实姓名
+     */
+    private String realName;
+    /**
+     * 身份证号
+     */
+    private String idCard;
+    /**
+     * 生日
+     */
+    private LocalDateTime birthday;
 
 }

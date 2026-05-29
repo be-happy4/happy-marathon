@@ -48,4 +48,8 @@ public interface AdminUserMapper extends BaseMapperX<AdminUserDO> {
         return selectList(AdminUserDO::getDeptId, deptIds);
     }
 
+    default AdminUserDO selectByIdCard(String idCard) {
+        return selectOne(AdminUserDO::getIdCard, idCard);
+    }
+
 }
