@@ -49,6 +49,8 @@
         <spring.boot.version>3.5.9</spring.boot.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 默认跳过测试，CI 中通过 -DskipTests=false 开启 -->
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
