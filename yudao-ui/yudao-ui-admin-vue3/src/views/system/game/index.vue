@@ -140,7 +140,7 @@
   </ContentWrap>
 
   <ContentWrap>
-    <el-table v-loading="loading" :data="list" @sort-change="handleSortChange" @selection-change="handleRowCheckboxChange" default-sort="{prop: 'gameDate', order: 'descending'}">
+    <el-table v-loading="loading" :data="list" @sort-change="handleSortChange" @selection-change="handleRowCheckboxChange" :default-sort="{prop: 'gameDate', order: 'descending'}">
       <el-table-column type="selection" width="55" />
       <el-table-column align="center" label="赛事名称" min-width="160" prop="name" show-overflow-tooltip />
       <el-table-column align="center" label="比赛日期" prop="gameDate" sortable width="120" />
