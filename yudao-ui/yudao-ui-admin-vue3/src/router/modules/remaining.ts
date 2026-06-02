@@ -850,6 +850,12 @@ const remainingRouter: AppRouteRecordRaw[] = [
         name: 'CrawlerResult',
         component: () => import('@/views/crawler/result/index.vue'),
         meta: { title: '爬取成绩', icon: 'ep:trophy' }
+      },
+      {
+        path: 'personal-score',
+        name: 'CrawlerPersonalScore',
+        component: () => import('@/views/crawler/personalScore/index.vue'),
+        meta: { title: '个人成绩查询', icon: 'ep:user-filled' }
       }
     ]
   }
