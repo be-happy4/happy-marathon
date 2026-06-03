@@ -119,7 +119,7 @@ const queryParams = reactive({
   chinaRoadRunLevels: [] as string[],
   statuses: [] as string[],
   importStatuses: [] as string[],
-  sortingFields: [] as { field: string; order: string }[]
+  sortingFields: [{ field: 'gameDate', order: 'descending' }] as { field: string; order: string }[]
 })
 
 const handleSortChange = (params: any) => {
@@ -146,7 +146,7 @@ const getSources = async () => {
 }
 
 const handleQuery = () => { queryParams.pageNo = 1; getList() }
-const resetQuery = () => { queryFormRef.value?.resetFields(); handleQuery() }
+const resetQuery = () => { queryFormRef.value?.resetFields(); queryParams.sortingFields = [{ field: 'gameDate', order: 'descending' }]; handleQuery() }
 
 onMounted(() => {
   getSources()

@@ -121,4 +121,11 @@ public class CrawlerApiController {
             @Valid @RequestBody cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreQueryReqVO reqVO) {
         return success(personalScoreQueryService.query(reqVO));
     }
+
+    @PostMapping("/personal-score/batch-query")
+    @Operation(summary = "批量查询个人成绩（手动过一次验证码后自动查询多人）")
+    public CommonResult<cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreBatchRespVO> batchQueryPersonalScore(
+            @Valid @RequestBody cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreBatchReqVO reqVO) {
+        return success(personalScoreQueryService.batchQuery(reqVO));
+    }
 }

@@ -269,6 +269,96 @@ INSERT INTO system_menu (
 INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
 (6401, '地区查询', 'system:region:query', 3, 1, 6400, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
 
+-- 爬虫管理
+INSERT INTO system_menu (
+    id, name, permission, type, sort, parent_id,
+    path, icon, component, component_name, status, visible, keep_alive, always_show,
+    creator, create_time, updater, update_time, deleted
+) VALUES (
+    6500, '爬虫管理', '', 1, 60, 0,
+    '/crawler', 'ep:monitor', '', '', 0, '1', '1', '1',
+    '1', NOW(), '1', NOW(), 0
+);
+
+-- 数据源管理
+INSERT INTO system_menu (
+    id, name, permission, type, sort, parent_id,
+    path, icon, component, component_name, status, visible, keep_alive, always_show,
+    creator, create_time, updater, update_time, deleted
+) VALUES (
+    6501, '数据源管理', '', 2, 2, 6500,
+    'source', 'ep:connection', 'crawler/source/index', 'CrawlerSource', 0, '1', '1', '1',
+    '1', NOW(), '1', NOW(), 0
+);
+
+INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
+(6502, '数据源查询', 'crawler:source:query', 3, 1, 6501, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6503, '数据源创建', 'crawler:source:create', 3, 2, 6501, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6504, '数据源更新', 'crawler:source:update', 3, 3, 6501, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6505, '数据源删除', 'crawler:source:delete', 3, 4, 6501, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6506, '手动触发爬取', 'crawler:source:trigger', 3, 5, 6501, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
+
+-- 任务日志
+INSERT INTO system_menu (
+    id, name, permission, type, sort, parent_id,
+    path, icon, component, component_name, status, visible, keep_alive, always_show,
+    creator, create_time, updater, update_time, deleted
+) VALUES (
+    6510, '任务日志', '', 2, 2, 6500,
+    'task-log', 'ep:document', 'crawler/taskLog/index', 'CrawlerTaskLog', 0, '1', '1', '1',
+    '1', NOW(), '1', NOW(), 0
+);
+
+INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
+(6511, '任务日志查询', 'crawler:task-log:query', 3, 1, 6510, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
+
+-- 爬取赛事
+INSERT INTO system_menu (
+    id, name, permission, type, sort, parent_id,
+    path, icon, component, component_name, status, visible, keep_alive, always_show,
+    creator, create_time, updater, update_time, deleted
+) VALUES (
+    6520, '爬取赛事', '', 2, 3, 6500,
+    'game', 'ep:medal', 'crawler/game/index', 'CrawlerGame', 0, '1', '1', '1',
+    '1', NOW(), '1', NOW(), 0
+);
+
+INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
+(6521, '爬取赛事查询', 'crawler:game:query', 3, 1, 6520, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6522, '赛事导入', 'crawler:game:import', 3, 2, 6520, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
+
+-- 爬取成绩
+INSERT INTO system_menu (
+    id, name, permission, type, sort, parent_id,
+    path, icon, component, component_name, status, visible, keep_alive, always_show,
+    creator, create_time, updater, update_time, deleted
+) VALUES (
+    6530, '爬取成绩', '', 2, 4, 6500,
+    'result', 'ep:trophy', 'crawler/result/index', 'CrawlerResult', 0, '1', '1', '1',
+    '1', NOW(), '1', NOW(), 0
+);
+
+INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
+(6531, '爬取成绩查询', 'crawler:result:query', 3, 1, 6530, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6532, '成绩确认导入', 'crawler:result:confirm', 3, 2, 6530, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6533, '成绩忽略', 'crawler:result:ignore', 3, 3, 6530, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6534, '手动匹配', 'crawler:result:match', 3, 4, 6530, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
+
+-- 个人成绩查询
+INSERT INTO system_menu (
+    id, name, permission, type, sort, parent_id,
+    path, icon, component, component_name, status, visible, keep_alive, always_show,
+    creator, create_time, updater, update_time, deleted
+) VALUES (
+    6540, '个人成绩查询', '', 2, 5, 6500,
+    'personal-score', 'ep:user-filled', 'crawler/personalScore/index', 'CrawlerPersonalScore', 0, '1', '1', '1',
+    '1', NOW(), '1', NOW(), 0
+);
+
+INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
+(6541, '个人成绩查询', 'crawler:personal-score:query', 3, 1, 6540, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
+(6542, '批量查询', 'crawler:personal-score:batch', 3, 2, 6540, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
+
 -- ----------------------------
 -- Table structure for system_region
 -- ----------------------------
