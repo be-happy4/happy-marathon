@@ -21,8 +21,7 @@ public interface CrawlerGameMapper extends BaseMapperX<CrawlerGameDO> {
                 .inIfPresent(CrawlerGameDO::getChinaRoadRunLevel, reqVO.getChinaRoadRunLevels())
                 .inIfPresent(CrawlerGameDO::getStatus, reqVO.getStatuses())
                 .inIfPresent(CrawlerGameDO::getImportStatus, reqVO.getImportStatuses())
-                .betweenIfPresent(CrawlerGameDO::getGameDate, reqVO.getGameDate())
-                .orderByDesc(CrawlerGameDO::getId));
+                .betweenIfPresent(CrawlerGameDO::getGameDate, reqVO.getGameDate()));
     }
 
     default CrawlerGameDO selectBySourceAndGameId(Long sourceId, String sourceGameId) {

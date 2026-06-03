@@ -182,6 +182,10 @@
                 </executions>
                 <configuration>
                     <jvmArguments>--enable-native-access=ALL-UNNAMED</jvmArguments>
+                    <environmentVariables>
+                        <!-- 跳过 Playwright 浏览器下载，使用预安装的 Chromium（仅需 npx playwright install chromium） -->
+                        <PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD>1</PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD>
+                    </environmentVariables>
                 </configuration>
             </plugin>
         </plugins>

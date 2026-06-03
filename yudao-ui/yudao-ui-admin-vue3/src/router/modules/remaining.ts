@@ -817,48 +817,6 @@ const remainingRouter: AppRouteRecordRaw[] = [
       }
     ]
   },
-  {
-    path: '/crawler',
-    component: Layout,
-    name: 'Crawler',
-    redirect: '/crawler/source',
-    meta: {
-      title: '爬虫管理',
-      icon: 'ep:monitor'
-    },
-    children: [
-      {
-        path: 'source',
-        name: 'CrawlerSource',
-        component: () => import('@/views/crawler/source/index.vue'),
-        meta: { title: '数据源管理', icon: 'ep:connection' }
-      },
-      {
-        path: 'task-log',
-        name: 'CrawlerTaskLog',
-        component: () => import('@/views/crawler/taskLog/index.vue'),
-        meta: { title: '任务日志', icon: 'ep:document' }
-      },
-      {
-        path: 'game',
-        name: 'CrawlerGame',
-        component: () => import('@/views/crawler/game/index.vue'),
-        meta: { title: '爬取赛事', icon: 'ep:medal' }
-      },
-      {
-        path: 'result',
-        name: 'CrawlerResult',
-        component: () => import('@/views/crawler/result/index.vue'),
-        meta: { title: '爬取成绩', icon: 'ep:trophy' }
-      },
-      {
-        path: 'personal-score',
-        name: 'CrawlerPersonalScore',
-        component: () => import('@/views/crawler/personalScore/index.vue'),
-        meta: { title: '个人成绩查询', icon: 'ep:user-filled' }
-      }
-    ]
-  }
 ]
 
 export default remainingRouter
