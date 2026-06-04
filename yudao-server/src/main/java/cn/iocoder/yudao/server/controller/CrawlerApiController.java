@@ -22,9 +22,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
@@ -127,5 +130,56 @@ public class CrawlerApiController {
     public CommonResult<cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreBatchRespVO> batchQueryPersonalScore(
             @Valid @RequestBody cn.iocoder.yudao.module.crawler.controller.admin.vo.PersonalScoreBatchReqVO reqVO) {
         return success(personalScoreQueryService.batchQuery(reqVO));
+    }
+
+    // ===== Analytics 数据分析 =====
+
+    @Resource
+    private JdbcTemplate jdbcTemplate;
+
+    @GetMapping("/analytics")
+    @Operation(summary = "获取爬虫数据分析仪表盘数据")
+    public CommonResult<Map<String, Object>> getAnalytics() {
+        Map<String, Object> result = new LinkedHashMap<>();
+
+        // Overview
+        result.put("totalGames", qs("SELECT count(*) FROM system_game WHERE deleted=0"));
+        result.put("totalCrawlerGames", qs("SELECT count(*) FROM crawler_game WHERE deleted=0"));
+        result.put("totalResults", qs("SELECT count(*) FROM crawler_game_result WHERE deleted=0"));
+        result.put("matchedResults", qs("SELECT count(*) FROM crawler_game_result WHERE match_status='MATCHED' AND deleted=0"));
+        result.put("importedResults", qs("SELECT count(*) FROM crawler_game_result WHERE import_status='IMPORTED' AND deleted=0"));
+        result.put("totalUsers", qs("SELECT count(*) FROM system_users WHERE deleted=0"));
+
+        // Annual game trend
+        result.put("gameTrend", ql("SELECT substring(game_date::text,1,4) AS y, count(*) AS c FROM system_game WHERE deleted=0 AND game_date IS NOT NULL GROUP BY y ORDER BY y"));
+
+        // Annual result trend
+        result.put("resultTrend", ql("SELECT substring(game_date::text,1,4) AS y, count(*) AS c FROM crawler_game_result WHERE deleted=0 AND game_date IS NOT NULL GROUP BY y ORDER BY y"));
+
+        // Game type distribution
+        result.put("gameTypeDist", ql("SELECT game_type AS n, count(*) AS c FROM system_game WHERE deleted=0 AND game_type IS NOT NULL GROUP BY game_type ORDER BY c DESC"));
+
+        // WA level distribution
+        result.put("levelDist", ql("SELECT world_athletics_level AS n, count(*) AS c FROM crawler_game WHERE deleted=0 AND world_athletics_level IS NOT NULL GROUP BY world_athletics_level ORDER BY c DESC"));
+
+        // Nationality top 15
+        result.put("nationalityDist", ql("SELECT nationality AS n, count(*) AS c FROM crawler_game_result WHERE deleted=0 AND nationality IS NOT NULL GROUP BY nationality ORDER BY c DESC LIMIT 15"));
+
+        // Gender ratio
+        result.put("genderDist", ql("SELECT gender AS n, count(*) AS c FROM crawler_game_result WHERE deleted=0 AND gender IS NOT NULL GROUP BY gender"));
+
+        // Region top 15 (China provinces from crawler games)
+        result.put("regionDist", ql("SELECT region_name AS n, count(*) AS c FROM crawler_game WHERE deleted=0 AND region_name IS NOT NULL AND region_name LIKE '%CHN%' GROUP BY region_name ORDER BY c DESC LIMIT 15"));
+
+        return success(result);
+    }
+
+    private long qs(String sql) {
+        Long v = jdbcTemplate.queryForObject(sql, Long.class);
+        return v != null ? v : 0;
+    }
+
+    private List<Map<String, Object>> ql(String sql) {
+        return jdbcTemplate.queryForList(sql);
     }
 }
