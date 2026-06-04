@@ -359,19 +359,6 @@ INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon
 (6541, '个人成绩查询', 'crawler:personal-score:query', 3, 1, 6540, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0),
 (6542, '批量查询', 'crawler:personal-score:batch', 3, 2, 6540, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
 
--- 数据分析
-INSERT INTO system_menu (
-    id, name, permission, type, sort, parent_id,
-    path, icon, component, component_name, status, visible, keep_alive, always_show,
-    creator, create_time, updater, update_time, deleted
-) VALUES (
-    6550, '数据分析', '', 2, 6, 6500,
-    'analytics', 'ep:data-analysis', 'crawler/analytics/index', 'CrawlerAnalytics', 0, '1', '1', '1',
-    '1', NOW(), '1', NOW(), 0
-);
-
-INSERT INTO system_menu (id, name, permission, type, sort, parent_id, path, icon, component, status, visible, keep_alive, always_show, creator, create_time, updater, update_time, deleted) VALUES
-(6551, '数据分析查询', 'crawler:analytics:query', 3, 1, 6550, '', '', '', 0, '1', '1', '1', '1', NOW(), '1', NOW(), 0);
 
 -- ----------------------------
 -- Table structure for system_region
