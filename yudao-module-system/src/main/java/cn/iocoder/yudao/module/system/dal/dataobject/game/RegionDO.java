@@ -25,6 +25,8 @@ public class RegionDO extends TenantBaseDO {
     private Long parentId;
     /** 排序 */
     private Integer sort;
+    /** GB/T 2260 行政区划代码（中国地区） */
+    private String gbCode;
     /** 租户编号 */
     private Long tenantId;
 
