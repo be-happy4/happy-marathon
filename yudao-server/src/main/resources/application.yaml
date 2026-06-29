@@ -14,27 +14,16 @@ spring:
     multipart:
       max-file-size: 16MB # 单个文件大小
       max-request-size: 32MB # 设置总上传的文件大小
-
-  # Jackson 配置项
-  jackson:
-    serialization:
-      write-dates-as-timestamps: true # 设置 Date 的格式，使用时间戳
-      write-date-timestamps-as-nanoseconds: false # 设置不使用 nanoseconds 的格式。例如说 1611460870.401，而是直接 1611460870401
-      write-durations-as-timestamps: true # 设置 Duration 的格式，使用时间戳
-      fail-on-empty-beans: false # 允许序列化无属性的 Bean
+    encoding:
+      enabled: true
+      charset: UTF-8 # 必须设置 UTF-8，避免 WebFlux 流式返回（AI 场景）会乱码问题
+      force: true
 
   # Cache 配置项
   cache:
     type: REDIS
     redis:
       time-to-live: 1h # 设置过期时间为 1 小时
-
-server:
-  servlet:
-    encoding:
-      enabled: true
-      charset: UTF-8 # 必须设置 UTF-8，避免 WebFlux 流式返回（AI 场景）会乱码问题
-      force: true
 
 --- #################### 接口文档配置 ####################
 
@@ -164,11 +153,6 @@ spring:
         client:
           host: 127.0.0.1
           port: 19530
-    qianfan: # 文心一言
-      api-key: x0cuLZ7XsaTCU08vuJWO87Lg
-      secret-key: R9mYF9dl9KASgi5RUq0FQt3wRisSnOcK
-    zhipuai: # 智谱 AI
-      api-key: 32f84543e54eee31f8d56b2bd6020573.3vh9idLJZ2ZhxDEs
     openai: # OpenAI 官方
       api-key: sk-aN6nWn3fILjrgLFT0fC4Aa60B72e4253826c77B29dC94f17
       base-url: https://api.gptsapi.net
@@ -185,10 +169,6 @@ spring:
       api-key: sk-e53UqbboF8QJCscYvzJscJxJXoFcFg4iJjl1oqgE7baJETmx
     dashscope: # 通义千问
       api-key: sk-47aa124781be4bfb95244cc62f6xxxx
-    minimax: # Minimax：https://www.minimaxi.com/
-      api-key: xxxx
-    moonshot: # 月之暗面（KIMI）
-      api-key: sk-abc
     deepseek: # DeepSeek
       api-key: sk-e94db327cc7d457d99a8de8810fc6b12
       chat:
@@ -241,6 +221,22 @@ yudao:
       enable: true
       api-key: sk-abc
       model: Baichuan4-Turbo
+    yiyan: # 文心一言
+      enable: false
+      api-key: bce-v3/xxxx
+      model: ernie-4.0-8k-latest
+    zhipu: # 智谱 AI（GLM）
+      enable: false
+      api-key: sk-abc
+      model: glm-5.2
+    minimax: # MiniMax
+      enable: false
+      api-key: xxxx
+      model: MiniMax-M3
+    moonshot: # 月之暗面（KIMI）
+      enable: false
+      api-key: sk-abc
+      model: kimi-k2.6
     midjourney:
       enable: true
   #    base-url: https://api.holdai.top/mj-relax/mj
